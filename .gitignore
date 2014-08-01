@@ -1,3 +1,5 @@
 logs/
 config_db.inc.php
 /custom_config.inc.php
+/third_party/smarty3/demo/templates_c/
+/third_party/smarty3/demo/cache/
