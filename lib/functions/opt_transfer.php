@@ -46,6 +46,17 @@ function opt_transf_cfg(&$opt_cfg, $right_list, $js_ot_name = 'ot')
 
 	$opt_cfg->from->map = $a_left;
 	$opt_cfg->to->map = $a_right;
+        $si = sizeof($a_right);
+        $countss=1;
+        foreach($a_right as $k => $v){
+            $a_selected .= $k;
+            if($si!=$countss)
+            $a_selected .= ',';
+            $countss++;
+        }
+        $a_selected = explode(',',$a_selected);
+        $opt_cfg->selectedme->map = $a_selected;
+        $opt_cfg->all->map = $a_right+$a_left;
 }
 
 
@@ -77,7 +88,7 @@ function keywords_opt_transf_cfg(&$opt_cfg, $right_list)
 	{
 		$opt_cfg->to = new stdClass();
 	}	
-	$opt_cfg->to->name = "to_select_box";
+	$opt_cfg->to->name = "to_select_box[]";
 	$opt_cfg->to->show_id_in_desc = true;
 	$opt_cfg->to->id_field = 'id';
 	$opt_cfg->to->desc_field = 'keyword';

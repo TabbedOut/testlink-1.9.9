@@ -77,7 +77,7 @@
 </style>
 
 {if $control->display_settings}
-	<div id="settings_panel" style="overflow: visible;">
+	<div id="settings_panel" style="overflow: visible;display:none;">
 		<div class="x-panel-header x-unselectable" style="overflow: visible;">
 			{$labels.caption_nav_settings}
 		</div>
@@ -125,7 +125,7 @@
 			{/if}
 
 			{if $control->settings.setting_refresh_tree_on_action}
-				<tr>
+				<tr style="display:none !important; ">
 		   			<td>{$labels.do_auto_update}</td>
 		  			<td>
 		  			   <input type="hidden" 
@@ -160,6 +160,7 @@
 		  		</tr>
 			{/if}
 			</table>
+                        
 		</div> {* settings *}
 	</div> {* settings_panel *}
 
@@ -174,7 +175,7 @@
 {if $control->display_filters}
 
 	<div id="filter_panel">
-		<div class="x-panel-header x-unselectable">
+		<div class="x-panel-header x-unselectable" >
 			{$labels.caption_nav_filters}
 		</div>
 
@@ -183,7 +184,7 @@
 		<table class="smallGrey" style="width:98%;">
 
 		{if $control->filters.filter_tc_id}
-			<tr>
+			<tr style="display:none;">
 				<td>{$labels.th_tcid}</td>
 				<td><input type="text" name="filter_tc_id"
 				                       size="{#TC_ID_SIZE#}"

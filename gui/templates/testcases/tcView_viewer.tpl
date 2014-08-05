@@ -78,7 +78,16 @@ viewer for test case in test specification
 	  <h2>{$tcView_viewer_labels.title_test_case} {$args_testcase.name|escape} </h2>
 {/if}
 
-
+{include file="inc_head.tpl" openHead='yes' jsValidate="yes" editorType=$gui->editorType}
+{include file="inc_del_onclick.tpl"}
+<script language="JavaScript" src="gui/javascript/OptionTransfer.js" type="text/javascript"></script>
+<script language="JavaScript" src="gui/javascript/expandAndCollapseFunctions.js" type="text/javascript"></script>
+<script language="javascript" src="gui/javascript/ext_extensions.js" type="text/javascript"></script>
+<script language="javascript" src="gui/javascript/tcase_utils.js" type="text/javascript"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+ <script src="//code.jquery.com/jquery-1.8.1.js"></script>
+<script language="javascript" src="gui/javascript/jquery-ui.js" type="text/javascript"></script>
+<link rel="stylesheet" href="gui/javascript/jquery-ui.css">
 <div style="display: inline;" class="groupBtn">
   
 {$warning_edit_msg=""}
@@ -131,14 +140,18 @@ viewer for test case in test specification
 
 
     {if $edit_enabled}
-         <input type="submit" name="edit_tc" 
+        
+         <input type="submit" name="edit_tc" style='display:none' 
+                onclick="doAction.value='edit';{$gui->submitCode}" value="{$tcView_viewer_labels.btn_edit}" />
+         <input type="button" name="edit_tc_popup" id="edit_tc_popup" 
                 onclick="doAction.value='edit';{$gui->submitCode}" value="{$tcView_viewer_labels.btn_edit}" />
     {/if}
   
     {* Double condition because for test case versions WE DO NOT DISPLAY this  button, using $args_can_delete_testcase='no'
       *}
     {if $delete_enabled && $args_can_do->delete_testcase == "yes" &&  $args_can_delete_testcase == "yes"}
-      <input type="submit" name="delete_tc" value="{$tcView_viewer_labels.btn_delete}" />
+      <input style='display:none' type="submit" name="delete_tc" value="{$tcView_viewer_labels.btn_delete}" />
+      <input type="button" name="delete_tc_popup"  id="delete_tc_popup" value="{$tcView_viewer_labels.btn_delete}" />
     {/if}
   
     {* Double condition because for test case versions WE DO NOT DISPLAY this  button, using $args_can_move_copy='no'
@@ -149,7 +162,7 @@ viewer for test case in test specification
 
     {if $edit_enabled}
         <input type="hidden" name="containerID" value="{$args_testcase.testsuite_id}" />
-        <input type="submit" name="new_tc" title="{$tcView_viewer_labels.hint_new_sibling}"
+        <input style="display:none" type="submit" name="new_tc" title="{$tcView_viewer_labels.hint_new_sibling}"
                onclick="doAction.value='create';{$gui->submitCode}" value="{$tcView_viewer_labels.btn_new_sibling}" />
     {/if}
 
@@ -159,13 +172,13 @@ viewer for test case in test specification
   <form style="display: inline;" id="tcexport" name="tcexport" method="post" action="{$exportTestCaseAction}" >
     <input type="hidden" name="testcase_id" value="{$args_testcase.testcase_id}" />
     <input type="hidden" name="tcversion_id" value="{$args_testcase.id}" />
-    <input type="submit" name="export_tc" value="{$tcView_viewer_labels.btn_export}" />
+    <input type="submit" style="display:none" name="export_tc" value="{$tcView_viewer_labels.btn_export}" />
   </form>
   </span>
 
   <span>
   <form style="display: inline;" id="tcprint" name="tcprint" method="post" action="" >
-    <input type="button" name="tcPrinterFriendly" value="{$tcView_viewer_labels.btn_print_view}" 
+    <input type="button" style="display:none" name="tcPrinterFriendly" value="{$tcView_viewer_labels.btn_print_view}" 
            onclick="javascript:openPrintPreview('tc',{$args_testcase.testcase_id},{$args_testcase.id},null,
                                                 '{$printTestCaseAction}');"/>
   </form>
@@ -180,7 +193,7 @@ viewer for test case in test specification
 
 
     {if $args_can_do->create_new_version == "yes"}
-      <input type="submit" name="do_create_new_version" title="{$tcView_viewer_labels.hint_new_version}" 
+      <input style="display:none" type="submit" name="do_create_new_version" title="{$tcView_viewer_labels.hint_new_version}" 
              value="{$tcView_viewer_labels.btn_new_version}" />
     {/if}
 
@@ -201,7 +214,7 @@ viewer for test case in test specification
               {assign var="act_deact_value" value="deactivate_this_tcversion"}
               {assign var="version_title_class" value="activate_version"}
           {/if}
-          <input type="submit" name="{$act_deact_btn}"
+          <input type="submit" style="display:none" name="{$act_deact_btn}"
                              value="{lang_get s=$act_deact_value}" />
     {/if}
 
@@ -283,7 +296,73 @@ function launchInsertStep(step_id)
 
 </script>
 {/literal}
+<style>
+.ui-resizable{
+    width:auto !important;
+    margin:0 auto !important;
+}
+#ui-id-1{
+    color: #15428b;
+    font: bold 11px tahoma,arial,verdana,sans-serif;
+}
+#outputDiv{
+    background-color: #ccd8e7;
+}
 
+</style>
+
+<script>
+   
+$(document).ready(function() {
+       
+    $( "#outputDiv" ).dialog({
+        autoOpen:false
+    });
+
+    $('#edit_tc_popup').click(function(){
+        $('#outputDiv').html('');
+        var CSRFName = 'CSRFGuard_1284846938';
+        var CSRFToken = 'd12886586cf231e8d4d2929f5ff62abfd98c1155191e9c56baa2ef3dc6e8836008bec6fe5a015b44e8cf0054797b31a4b6e01d504b19263a8492b10ae9406c33';
+        var testcase_id = '{$args_testcase.testcase_id}';
+        var tcversion_id = '{$args_testcase.id}';
+        var has_been_executed = '{$has_been_executed}';
+        var doAction = 'edit';
+        var show_mode = '{$gui->show_mode}';
+        $.post( "lib/testcases/tcEdit.php", { CSRFName: CSRFName, CSRFToken: CSRFToken, testcase_id: testcase_id, tcversion_id:tcversion_id,has_been_executed:has_been_executed,doAction:doAction,show_mode:show_mode })
+        .done(function( data ) {
+            //console.log("RESPONSE :: " + data);
+            //alert( "Data Loaded: " + data );
+            $('#outputDiv').html(data);
+
+        });
+        $('#outputDiv').dialog('open');
+    });
+    
+    
+    $('#delete_tc_popup').click(function(){
+        $('#outputDiv').html('');
+        var CSRFName = 'CSRFGuard_120986280';
+        var CSRFToken = '0723a350554c584f374bc181a846c15278f9d6203c88e0e0c814cef111d0e35280b72815aa63cf6057832dbc4d4341a15a8b7bed3118b5e5d4ff064a8b45038d';
+        var testcase_id = '{$args_testcase.testcase_id}';
+        var tcversion_id = '{$args_testcase.id}';
+        var has_been_executed = '0';
+        var doAction = '';
+        var show_mode = '{$gui->show_mode}';
+        var delete_tc = 'Delete';
+        $.post( "lib/testcases/tcEdit.php", { CSRFName: CSRFName, CSRFToken: CSRFToken, testcase_id: testcase_id, tcversion_id:tcversion_id,has_been_executed:has_been_executed,doAction:doAction,show_mode:show_mode,delete_tc:delete_tc })
+        .done(function( data ) {
+            //console.log("RESPONSE :: " + data);
+            //alert( "Data Loaded: " + data );
+            $('#outputDiv').html(data);
+
+        });
+        $('#outputDiv').dialog('open');
+    });
+    
+});
+</script>
+
+<div id="outputDiv" title="Test Link" ></div>
 <form id="stepsControls" name="stepsControls" method="post" action="lib/testcases/tcEdit.php">
   <input type="hidden" name="goback_url" value="{$goBackAction}" />
   <input type="hidden" id="stepsControls_doAction" name="doAction" value="" />
@@ -314,7 +393,7 @@ function launchInsertStep(step_id)
 
 <div {$addInfoDivStyle}>
   {if $edit_enabled}
-  <input type="submit" name="create_step" 
+  <input style="display:none !important;" type="submit" name="create_step" 
           onclick="doAction.value='createStep';{$gui->submitCode}" value="{$tcView_viewer_labels.btn_create_step}" />
 
   {if $args_testcase.steps != ''}
@@ -342,12 +421,14 @@ function launchInsertStep(step_id)
   {/if}
 
   <p>
+      
   <div {$addInfoDivStyle}>
     <table cellpadding="0" cellspacing="0" style="font-size:100%;">
           <tr>
              <td width="35%" style="vertical-align:top;"><a href={$gsmarty_href_keywordsView}>{$tcView_viewer_labels.keywords}</a>: &nbsp;
           </td>
            <td style="vertical-align:top;">
+               
                {foreach item=keyword_item from=$args_keywords_map}
                 {$keyword_item.keyword|escape}
                 <br />

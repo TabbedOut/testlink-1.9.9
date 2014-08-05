@@ -4,7 +4,7 @@ TestLink Open Source Project - http://testlink.sourceforge.net/
 *}
 
 <p>
-<fieldset>
+<fieldset style="display:none">
 <legend></legend>
 <form style="display:inline;" id="statusForm" name="statusForm" id="statusForm" 
       method="post" action="lib/testcases/tcEdit.php">
@@ -12,11 +12,12 @@ TestLink Open Source Project - http://testlink.sourceforge.net/
   <input type="hidden" name="testcase_id" value="{$args_testcase.testcase_id}" />
   <input type="hidden" name="tcversion_id" value="{$args_testcase.id}" />
 
-  <span class="labelHolder">{$tcView_viewer_labels.status}{$smarty.const.TITLE_SEP}</span>
+  {*<span class="labelHolder" style="display:none">{$tcView_viewer_labels.status}{$smarty.const.TITLE_SEP}</span>*}
   {if $edit_enabled}
-  <select name="status" id="status" onchange="document.getElementById('statusForm').submit();">
+  {*<select  style="display:none;" name="status" id="status" onchange="document.getElementById('statusForm').submit();">
     {html_options options=$gui->domainTCStatus selected=$args_testcase.status}
-  </select>
+  </select>*}
+  <input type="hidden" name="status" id="status" value="7" />
   {else}
     {$gui->domainTCStatus[$args_testcase.status]}
   {/if}
@@ -68,15 +69,15 @@ TestLink Open Source Project - http://testlink.sourceforge.net/
   <input type="hidden" name="tcversion_id" value="{$args_testcase.id}" />
 
   <span class="labelHolder" title="{$tcView_viewer_labels.estimated_execution_duration}"
-        style="margin-left:20px;">{$tcView_viewer_labels.estimated_execution_duration_short}{$smarty.const.TITLE_SEP}</span>
+        style="margin-left:20px;display:none">{$tcView_viewer_labels.estimated_execution_duration_short}{$smarty.const.TITLE_SEP}</span>
 
   {if $edit_enabled}
   <span>
-  <input type="text" name="estimated_execution_duration" id="estimated_execution_duration"
+  <input style="display:none" type="text" name="estimated_execution_duration" id="estimated_execution_duration"
        size="{#EXEC_DURATION_SIZE#}" maxlength="{#EXEC_DURATION_MAXLEN#}"
        title="{$tcView_viewer_labels.estimated_execution_duration}" 
        value={$args_testcase.estimated_exec_duration}>
-  <input type="submit" name="setEstimated" value="{$tcView_viewer_labels.btn_save}" />
+  <input style="display:none;" type="submit" name="setEstimated" value="{$tcView_viewer_labels.btn_save}" />
   </span>
   {else}
     {$args_testcase.estimated_exec_duration}

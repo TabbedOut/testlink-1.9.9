@@ -16,6 +16,8 @@
  * @since 1.9.9
  *
  **/
+
+
 require_once("../../config.inc.php");
 require_once("common.php");
 require_once("opt_transfer.php");
@@ -25,6 +27,7 @@ $cfg = getCfg();
 testlinkInitPage($db);
 $optionTransferName = 'ot';
 $args = init_args($cfg,$optionTransferName);
+
 require_once(require_web_editor($cfg->webEditorCfg['type']));
 
 $tcase_mgr = new testcase($db);
@@ -331,13 +334,25 @@ else if($args->do_activate_this || $args->do_deactivate_this)
 */
 function init_args(&$cfgObj,$otName)
 {
+  
   $tc_importance_default = config_get('testcase_importance_default');
   
   $args = new stdClass();
   $_REQUEST = strings_stripSlashes($_REQUEST);
-
+  
   $rightlist_html_name = $otName . "_newRight";
-  $args->assigned_keywords_list = isset($_REQUEST[$rightlist_html_name])? $_REQUEST[$rightlist_html_name] : "";
+  //$args->assigned_keywords_list = isset($_REQUEST[$rightlist_html_name])? $_REQUEST[$rightlist_html_name] : "";
+    $vals = '';
+    if(isset($_REQUEST['to_select_box'])){
+        foreach($_REQUEST['to_select_box'] as $keys => $valus)
+        {
+            $vals .= $valus.',';
+        }
+        $vals = substr($vals,0,-1);   
+        
+    }
+    $args->assigned_keywords_list = $vals;
+    
   $args->container_id = isset($_REQUEST['containerID']) ? intval($_REQUEST['containerID']) : 0;
   
   $args->file_id = isset($_REQUEST['file_id']) ? intval($_REQUEST['file_id']) : 0;

@@ -124,7 +124,7 @@ Ext.onReady(function(){
 			deviceEditForm.loadData( rows[0] );
 			editWindow.show();
             inventoryGrid.getView().refresh();
-		}
+	}
         else
         {
         	Ext.MessageBox.alert(tls_warning, '<p>'+tls_dlg_select_txt+'</p>');
@@ -254,7 +254,7 @@ Ext.onReady(function(){
     ({
         baseCls: 'x-plain',
         layout:'absolute',
-		method: 'POST',
+	method: 'POST',
         url:'lib/inventory/setInventory.php',
         defaultType: 'textfield',
 //		defaults: {width: 230},
@@ -373,7 +373,7 @@ Ext.onReady(function(){
 			deviceEditForm.findById('editHw').setValue(record.get('hardware'));
 			deviceEditForm.findById('editNotes').setValue(record.get('notes'));
 
-		}		
+		}	
     });
 
 
@@ -421,7 +421,7 @@ Ext.onReady(function(){
 
 <h1 class="title">{$labels.inventory_title}</h1>
 
-<div id="user_feedback"></div>
+<div id="user_feedback">TEST</div>
 
 <div class="workBack">
     <div id="inventoryTable"></div>

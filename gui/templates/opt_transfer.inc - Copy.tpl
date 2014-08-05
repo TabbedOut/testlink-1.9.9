@@ -8,14 +8,11 @@ Purpose: manage the OptionTransfer.js created by Matt Kruse
 Author: Francisco Mancardi
         Based on Cold Fusion code by Alessandro Lia (alessandro.lia@gruppotesi.com
 *}
-
+  
 
 {if $smarty.request.edit_testsuite == 'Edit'}{$is_edit = true}{/if}
 
 {if $smarty.request.new_testsuite == 'Create'}{$is_edit = false}{/if}
-
-{if $smarty.request.doAction == 'edit'}{$tc_edit = true}{/if}
-
 {if $showit == 'yes'}{$is_edit=true}{/if}
 <script>
     $(document).ready(function(){
@@ -64,7 +61,7 @@ Author: Francisco Mancardi
       </td>*}
       <td align="center" width="100%">
          <div class="labelHolder" >{$option_transfer->to->lbl}</div>
-        {if $is_edit == true && $tc_edit != true}
+        {if $is_edit == true}
          {html_options name=$option_transfer->to->name 
                        id=$option_transfer->to->name
                        size=$option_transfer->size 
@@ -80,7 +77,7 @@ Author: Francisco Mancardi
                        ondblclick=$opt_cfg->js_events->right2left_click  
                        options=$option_transfer->from->map}
         {/if}
-        {if $is_edit != true && $tc_edit != true}
+        {if $is_edit != true}
          {html_options name=$option_transfer->to->name 
                        id=$option_transfer->to->name
                        size=$option_transfer->size 
@@ -93,22 +90,6 @@ Author: Francisco Mancardi
                        multiple="yes"
                        ondblclick=$opt_cfg->js_events->right2left_click  
                        options=$option_transfer->from->map}
-        {/if}
-        {if $tc_edit == true}
-         {html_options name=$option_transfer->to->name 
-                       id=$option_transfer->to->name
-                       size=$option_transfer->size 
-                       onkeypress="content_modified = true" 
-                       onchange="content_modified = true"
-                       required=""
-                       x-moz-errormessage="Please select a keyword, if none exist. Please add from the home page" 
-                       value=""
-                       title="Please select a keyword. if none exist. Please add from the home page."
-                       style=$option_transfer->style 
-                       multiple="yes"                       
-                       ondblclick=$opt_cfg->js_events->right2left_click  
-                       options=$option_transfer->all->map
-                       selected=$option_transfer->selectedme->map}
         {/if}
       </td>
     </tr>

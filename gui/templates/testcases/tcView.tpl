@@ -77,7 +77,8 @@ var {$gui->dialogName} = new std_dialog('&refreshTree');
       {* <br /> *}
     {/if}
     {if $gui->show_title == 'no'}
-      {$gui->tc_current_version[idx][0].tc_external_id|escape}:{$gui->tc_current_version[idx][0].name|escape}</h2>
+{*      {$gui->tc_current_version[idx][0].tc_external_id|escape}:*}
+      {$gui->tc_current_version[idx][0].name|escape}</h2>
     {/if}
     <div class="direct_link" style='display:none'><a href="{$gui->direct_link}" target="_blank">{$gui->direct_link}</a></div>
     {include file="testcases/tcView_viewer.tpl" 

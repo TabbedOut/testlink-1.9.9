@@ -15,8 +15,8 @@ Edit test specification: containers
 {assign var="cfg_section" value=$smarty.template|basename|replace:".tpl":""}
 {config_load file="input_dimensions.conf" section=$cfg_section}
 
-{include file="inc_head.tpl" openHead='yes' jsValidate="yes" editorType=$editorType}
-{include file="inc_del_onclick.tpl"}
+{*{include file="inc_head.tpl" openHead='yes' jsValidate="yes" editorType=$editorType}*}
+{*{include file="inc_del_onclick.tpl"}*}
 
 <script language="javascript" src="gui/javascript/ext_extensions.js" type="text/javascript"></script>
 <script language="JavaScript" src="gui/javascript/OptionTransfer.js" type="text/javascript"></script>
@@ -77,11 +77,11 @@ function validateForm(f)
 {/literal}
 
 {if $tlCfg->gui->checkNotSaved}
-  <script type="text/javascript">
+  <!--<script type="text/javascript">
   var unload_msg = "{$labels.warning_unsaved|escape:'javascript'}";
   var tc_editor = "{$editorType}";
-  </script>
-  <script src="gui/javascript/checkmodified.js" type="text/javascript"></script>
+  </script> 
+  <script src="gui/javascript/checkmodified.js" type="text/javascript"></script> -->
 {/if}
 
 </head>
@@ -98,10 +98,10 @@ function validateForm(f)
 	
 	<div>
 		<input type="hidden" name="doAction" value="" />
-		<input type="submit" name="update_testsuite" value="{$labels.btn_save}" 
+		{*<input type="submit" name="update_testsuite" value="{$labels.btn_save}" 
 		       onclick="show_modified_warning = false; doAction.value='update_testsuite'" />
 		<input type="button" name="go_back" value="{$labels.cancel}" 
-		       onclick="javascript: show_modified_warning = false; history.back();"/>
+		       onclick="javascript: show_modified_warning = false; history.back();"/>*}
 	</div>
 	 
 	{include file="testcases/inc_testsuite_viewer_rw.tpl"}
@@ -109,6 +109,7 @@ function validateForm(f)
    {* Custom fields *}
    {if $cf neq ""}
      <p>
+         
      <div id="cfields_design_time" class="custom_field_container">
      {$cf}
      </div>
@@ -116,14 +117,14 @@ function validateForm(f)
    {/if}
    
   <div>
-   <a href={$gsmarty_href_keywordsView}>{$labels.tc_keywords}</a>
-	 {include file="opt_transfer.inc.tpl" option_transfer=$opt_cfg}
+   {*<a href={$gsmarty_href_keywordsView}>{$labels.tc_keywords}</a>*}
+	 {*{include file="opt_transfer.inc.tpl" option_transfer=$opt_cfg}*}
 	 </div>
 	<br></br>
 	<div>
 		<input type="submit" name="update_testsuite" id="update_testsuite_bottom" value="{$labels.btn_save}" 
 		       onclick="show_modified_warning = false; doAction.value='update_testsuite'" />
-		<input type="button" name="go_back" value="{$labels.cancel}" 
+		<input style="display:none" type="button" name="go_back" value="{$labels.cancel}" 
 		       onclick="javascript: show_modified_warning = false; history.back();"/>
 	</div>
 	</form>

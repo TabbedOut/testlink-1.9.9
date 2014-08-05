@@ -75,6 +75,7 @@ var del_action=fRoot+"lib/usermanagement/usersView.php?operation=disable&user=";
         <form method="post" action="{$createUserAction}" name="launch_create">
           <input type="hidden" id="operation" name="operation" value="" />
           <input type="submit" name="doCreate"  value="{$labels.btn_create}" />
+          <input type="submit" name="doCreate"  value="{$labels.btn_create}" />
         </form>
       </span>
 

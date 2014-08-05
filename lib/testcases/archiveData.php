@@ -60,6 +60,7 @@ switch($args->feature)
   case 'testcase':
     try
     {
+      
       processTestCase($db,$smarty,$args,$gui,$grants,$cfg);
     }
     catch (Exception $e)

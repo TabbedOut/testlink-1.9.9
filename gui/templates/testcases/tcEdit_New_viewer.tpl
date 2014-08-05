@@ -68,6 +68,7 @@ Purpose: smarty template - create new testcase
     {$layout1}
     {include file="testcases/attributesLinear.inc.tpl"}
   </div>
+ 
 
 
   {* Custom fields - with standard location  *}
@@ -81,7 +82,7 @@ Purpose: smarty template - create new testcase
   <br />
   <div>
   <a href={$gsmarty_href_keywordsView}>{$labels.tc_keywords}</a>
-  {include file="opt_transfer.inc.tpl" option_transfer=$gui->opt_cfg}
+  {include file="opt_transfer.inc.tpl" option_transfer=$gui->opt_cfg showit='yes'}
   </div>
   
   {if $gui->opt_requirements==TRUE && $gui->grants->requirement_mgmt=='yes' && isset($gui->tc.testcase_id)}

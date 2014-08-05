@@ -10,8 +10,8 @@ Purpose: smarty template - create new testcase
 {lang_get var='labels' s='btn_create,cancel,warning,title_new_tc,
                           warning_empty_tc_title,warning_unsaved,stay_here_tc'}
 
-{include file="inc_head.tpl" openHead='yes' jsValidate="yes"}
-{include file="inc_del_onclick.tpl"}
+{*{include file="inc_head.tpl" openHead='yes' jsValidate="yes"}*}
+{*{include file="inc_del_onclick.tpl"}*}
 <script language="JavaScript" src="gui/javascript/OptionTransfer.js" type="text/javascript"></script>
 <script language="JavaScript" src="gui/javascript/expandAndCollapseFunctions.js" type="text/javascript"></script>
 <script language="javascript" src="gui/javascript/tcase_utils.js" type="text/javascript"></script>
@@ -77,7 +77,21 @@ function validateForm(f)
   <script type="text/javascript">
   var unload_msg = "{$labels.warning_unsaved|escape:'javascript'}";
   var tc_editor = "{$editorType}";
+  $(document).ready(function(){
+    $('.ui-button').click(function(){
+            if (CKEDITOR.instances['details']) {
+                CKEDITOR.remove(CKEDITOR.instances['details']);
+            }
+            if (CKEDITOR.instances['summary']) {
+                CKEDITOR.remove(CKEDITOR.instances['summary']);
+            }
+            if (CKEDITOR.instances['preconditions']) {
+                CKEDITOR.remove(CKEDITOR.instances['preconditions']);
+            }
+        });
+    })
   </script>
+  
   <script src="gui/javascript/checkmodified.js" type="text/javascript"></script>
 {/if}
 
@@ -122,13 +136,14 @@ function validateForm(f)
 
 
 	<div class="groupBtn">
+           
 			<input type="hidden" id="do_create"  name="do_create" value="do_create" />
 			<input type="submit" id="do_create_button"  name="do_create_button" value="{$labels.btn_create}" 
-			       onclick="show_modified_warning=false;" />
-			<input type="button" name="go_back" value="{$labels.cancel}" 
-			       onclick="javascript: show_modified_warning=false; history.back();"/>
+			       onclick="show_modified_warning=false;" style="display:none" />
+			<input style="display:none" type="button" name="go_back" value="{$labels.cancel}" 
+			       onclick="javascript: show_modified_warning=false; history.back();" style="display:none"/>
 
-     <input type="checkbox" id="stay_here"  name="stay_here" 
+                        <input type="checkbox" id="stay_here"  style="display:none" name="stay_here" 
          {if $gui->stay_here} checked="checked" {/if}/> {$labels.stay_here_tc}
 
 
@@ -140,7 +155,7 @@ function validateForm(f)
 			<input type="hidden" id="do_create_2"  name="do_create" value="do_create" />
 			<input type="submit" id="do_create_button_2"  name="do_create_button" value="{$labels.btn_create}" 
 			       onclick="show_modified_warning=false;" />
-			<input type="button" name="go_back" value="{$labels.cancel}" 
+			<input style="display:none" type="button" name="go_back" value="{$labels.cancel}" 
 			       onclick="javascript: show_modified_warning=false; history.back();"/>
 	</div>	
   

@@ -114,8 +114,6 @@ function validateForm(f)
   <script src="gui/javascript/checkmodified.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-        
-       
        
         $( "#outputDiv" ).dialog({
             autoOpen:false
@@ -126,7 +124,7 @@ function validateForm(f)
             var CSRFName = 'CSRFGuard_1542399035';
             var CSRFToken = '9d5a1fc86e4e09ba7c5d1c3c625caacdfae8fe78c2e7ab63ffd4aea8617dc0629840942433d4275bd1ead9d63447f0a7e3317b994521e64ee20e7345e682a453';
             var doAction = '';
-            var containerID = {$container_id};
+            var containerID = '132';
             var new_testsuite = 'Create';
             $.post( "lib/testcases/containerEdit.php", { CSRFName: CSRFName, CSRFToken: CSRFToken, doAction: doAction, containerID: containerID, new_testsuite:new_testsuite  })
             .done(function( data ) {
@@ -153,21 +151,6 @@ function validateForm(f)
             });
             $( "#outputDiv" ).dialog('open');
         });
-        
-        
-        $('.ui-button').click(function(){
-            if (CKEDITOR.instances['details']) {
-                CKEDITOR.remove(CKEDITOR.instances['details']);
-            }
-            if (CKEDITOR.instances['summary']) {
-                CKEDITOR.remove(CKEDITOR.instances['summary']);
-            }
-            if (CKEDITOR.instances['preconditions']) {
-                CKEDITOR.remove(CKEDITOR.instances['preconditions']);
-            }
-        });
-        
-        
         
         $('#create_tc_popup').click(function(){
             $('#outputDiv').html('');
@@ -217,9 +200,9 @@ function validateForm(f)
 		<input type="hidden" name="doAction" id="doAction" value="" />
 		<input type="hidden" name="containerID" value="{$gui->container_data.id}" />
 		
-		<input style="display:none" type="submit" name="new_testsuite" value="{$labels.btn_new_testsuite}" />
+		<input type="submit" name="new_testsuite" value="{$labels.btn_new_testsuite}" />
 
-                <input type="button" id="new_testsuite_for_popup" name="new_testsuite_for_popup" value="{$labels.btn_new_testsuite}" />
+                <input type="button" id="new_testsuite_for_popup" name="new_testsuite_for_popup" value="{'Create link for test'}" />
                 
 		<input type="submit" name="reorder_testproject_testsuites_alpha" value="{$labels.btn_reorder_testsuites_alpha}"
 				     title="{$labels.btn_reorder_testsuites_alpha}" />
@@ -272,8 +255,8 @@ function validateForm(f)
 		<span style="float: left; margin-right: 5px;">
 		<form method="post" action="lib/testcases/containerEdit.php">
 			<input type="hidden" name="containerID" value="{$gui->container_data.id}" />
-			<input style="display:none" type="submit" name="new_testsuite" value="{$labels.btn_new_testsuite}" />
-                        <input type="button" id="new_testsuite_for_popup" name="new_testsuite_for_popup" value="{$labels.btn_new_testsuite}" />
+			<input type="submit" name="new_testsuite" value="{$labels.btn_new_testsuite}" />
+                        <input type="button" id="new_testsuite_for_popup" name="new_testsuite_for_popup" value="{'Create link for test'}" />
 		</form>
 		</span>
 
@@ -281,9 +264,9 @@ function validateForm(f)
                     
 			<input type="hidden" name="testsuiteID" value="{$gui->container_data.id}" />
 			<input type="hidden" name="testsuiteName" value="{$gui->container_data.name|escape}" />
-			<input style="display:none" type="submit" name="edit_testsuite" value="{$labels.btn_edit_testsuite}"
+			<input type="submit" name="edit_testsuite" value="{$labels.btn_edit_testsuite}"
 				     title="{$labels.alt_edit_testsuite}" />
-                        <input type="button" name="edit_testsuite_popup" value="{$labels.btn_edit_testsuite}"
+                        <input type="button" name="edit_testsuite_popup" value="{'edit_testsuite_popup'}"
 				     title="{'edit_testsuite_popup'}" id="edit_testsuite_popup" />
 			<input type="submit" name="move_testsuite_viewer" value="{$labels.btn_move_cp_testsuite}"
 				     title="{$labels.alt_move_cp_testsuite}" />
@@ -308,8 +291,8 @@ function validateForm(f)
 		<h2>{$labels.testcase_operations}</h2>
 		<form method="post" action="lib/testcases/tcEdit.php">
 		  <input type="hidden" name="containerID" value="{$gui->container_data.id}" />
-			<input style="display:none" type="submit" accesskey="t" id="create_tc" name="create_tc" value="{$labels.btn_new_tc}" />
-                        <input type="button" accesskey="t" id="create_tc_popup" name="create_tc_popup" value="{$labels.btn_new_tc}" />
+			<input type="submit" accesskey="t" id="create_tc" name="create_tc" value="{$labels.btn_new_tc}" />
+                        <input type="button" accesskey="t" id="create_tc_popup" name="create_tc_popup" value="{'creat_tc_popup'}" />
 		</form>
 
 		<form method="post" action="lib/testcases/containerEdit.php">

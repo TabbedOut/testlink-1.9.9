@@ -206,19 +206,19 @@ class database
 
       tLog("ERROR ON exec_query() - database.class.php <br />" . $this->error(htmlspecialchars($p_query)) . 
            "<br />THE MESSAGE : $message ", 'ERROR', "DATABASE");     
-      echo "<pre> ============================================================================== </pre>";
-      echo "<pre> DB Access Error - debug_print_backtrace() OUTPUT START </pre>";
-      echo "<pre> ============================================================================== </pre>";
+      //echo "<pre> ============================================================================== </pre>";
+      //echo "<pre> DB Access Error - debug_print_backtrace() OUTPUT START </pre>";
+      //echo "<pre> ============================================================================== </pre>";
       
       if(defined('DBUG_ON') && DBUG_ON == 1)
       { 
-        echo "<pre>"; debug_print_backtrace(); echo "</pre>";
+        //echo "<pre>"; debug_print_backtrace(); echo "</pre>";
       }   
       else
       {
-        echo "<pre>"; debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS); echo "</pre>";
+        //echo "<pre>"; debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS); echo "</pre>";
       }  
-      echo "<pre> ============================================================================== </pre>";
+     // echo "<pre> ============================================================================== </pre>";
       $t_result = false;
     }
     

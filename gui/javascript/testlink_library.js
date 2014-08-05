@@ -51,6 +51,14 @@ function focusInputField(id,selectIt)
 }
 
 
+
+
+
+   
+
+
+
+
 /* 
 function: show help <div> tag with absolute position or right site ow window
 arg: localized text of help
@@ -230,7 +238,7 @@ function ET(id,v)
   var _FUNCTION_NAME_="ET";
   var pParams = tree_getPrintPreferences();
   var my_location = fRoot+menuUrl+"?version_id="+v+"&edit=testcase&id="+id+args;
-  // alert(_FUNCTION_NAME_ + " " +my_location);
+  //alert(_FUNCTION_NAME_ + " " +my_location);
   
   parent.workframe.location = my_location;
 }
@@ -1594,4 +1602,3 @@ function toogleShowHide(oid)
     obj.style.display = 'none';
   }
 }
-

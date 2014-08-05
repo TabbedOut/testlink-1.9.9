@@ -84,8 +84,6 @@ var {$opt_cfg->js_ot_name} = new OptionTransfer("{$opt_cfg->from->name}","{$opt_
    
   	 <br />
    <div>
-       
-       
    {*<a href={$gsmarty_href_keywordsView}>{$labels.tc_keywords}</a>*}
 	 {include file="opt_transfer.inc.tpl" option_transfer=$opt_cfg show='none'}
 	 </div>

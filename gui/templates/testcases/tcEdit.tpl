@@ -10,9 +10,9 @@ Purpose: smarty template - edit test specification: test case
           s="warning,warning_empty_tc_title,btn_save,warning_estimated_execution_duration_format,
              version,title_edit_tc,cancel,warning_unsaved"}
 
-{include file="inc_head.tpl" openHead='yes' jsValidate="yes" editorType=$gui->editorType}
+{*{include file="inc_head.tpl" openHead='yes' jsValidate="yes" editorType=$gui->editorType}*}
 
-{include file="inc_del_onclick.tpl"}
+{*{include file="inc_del_onclick.tpl"}*}
 <script language="JavaScript" src="gui/javascript/OptionTransfer.js" type="text/javascript"></script>
 <script language="JavaScript" src="gui/javascript/expandAndCollapseFunctions.js" type="text/javascript"></script>
 <script language="javascript" src="gui/javascript/ext_extensions.js" type="text/javascript"></script>
@@ -29,7 +29,7 @@ var {$opt_cfg->js_ot_name} = new OptionTransfer("{$opt_cfg->from->name}","{$opt_
 {$opt_cfg->js_ot_name}.saveNewRightOptions("{$opt_cfg->js_ot_name}_newRight");
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 var warning_empty_testcase_name = "{$labels.warning_empty_tc_title|escape:'javascript'}";
 var alert_box_title = "{$labels.warning|escape:'javascript'}";
 var warning_estimated_execution_duration_format = "{$labels.warning_estimated_execution_duration_format|escape:'javascript'}";
@@ -83,14 +83,14 @@ function validateForm(the_form)
 	return Ext.ux.requireSessionAndSubmit(the_form);
 }
 {/literal}
-</script>
+</script>-->
 
 {if $tlCfg->gui->checkNotSaved}
-  <script type="text/javascript">
+  <!--<script type="text/javascript">
   var unload_msg = "{$labels.warning_unsaved|escape:'javascript'}";
   var tc_editor = "{$gui->editorType}";
-  </script>
-  <script src="gui/javascript/checkmodified.js" type="text/javascript"></script>
+  </script>-->
+  <!--<script src="gui/javascript/checkmodified.js" type="text/javascript"></script>-->
 {/if}
 </head>
 
@@ -118,19 +118,20 @@ function validateForm(the_form)
 	
 	{* when save or cancel is pressed do not show modification warning *}
 	<div class="groupBtn">
-		<input id="do_update" type="submit" name="do_update" 
+		{*<input id="do_update" type="submit" name="do_update" 
 		       onclick="show_modified_warning=false; doAction.value='doUpdate'" value="{$labels.btn_save}" />
 		
 		<input type="button" name="go_back" value="{$labels.cancel}" 
-		       onclick="show_modified_warning=false; javascript: history.back();"/>
+		       onclick="show_modified_warning=false; javascript: history.back();"/>*}
 	</div>	
+        
 	{include file="testcases/tcEdit_New_viewer.tpl"}
 	
 	{* when save or cancel is pressed do not show modification warning *}
 	<div class="groupBtn">
 		<input id="do_update" type="submit" name="do_update" 
 		       onclick="show_modified_warning=false; doAction.value='doUpdate'" value="{$labels.btn_save}" />
-		<input type="button" name="go_back" value="{$labels.cancel}" 
+		<input style='display:none' type="button" name="go_back" value="{$labels.cancel}" 
 		       onclick="show_modified_warning=false; javascript: history.back();"/>
 	</div>	
 </form>
