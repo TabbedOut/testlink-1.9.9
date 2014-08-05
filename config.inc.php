@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * TestLink Open Source Project - http://testlink.sourceforge.net/
  * This script is distributed under the GNU General Public License 2 or later.
@@ -546,7 +546,7 @@ $tlCfg->treemenu_default_testsuite_order = 1;
 $tlCfg->treemenu_default_testcase_order = 100;
 
 /** show/hide testcase id on tree menu */
-$tlCfg->treemenu_show_testcase_id = TRUE;
+$tlCfg->treemenu_show_testcase_id = FALSE;
 
 /** Reorder test cases based on TC Name or External ID in tree on
  *  test suite level using reorder button 
@@ -1508,3 +1508,4 @@ $tlCfg->gui->title_separator_2 =  $tlCfg->gui_title_separator_2;
 $tlCfg->gui->role_separator_open =  $tlCfg->gui_separator_open;
 $tlCfg->gui->role_separator_close = $tlCfg->gui_separator_close;
 // ----- END OF FILE --------------------------------------------------------------------
+
