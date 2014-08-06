@@ -139,7 +139,7 @@ $tlCfg->force_https = false;
  * @var integer Set the session timeout for inactivity [minutes].
  * Default high value disables this feature.
  */
-$tlCfg->sessionInactivityTimeout = 9900;
+$tlCfg->sessionInactivityTimeout = 19900;
 
 /**
  * Set the session timeout value (in minutes).

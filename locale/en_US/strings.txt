@@ -999,7 +999,7 @@ $TLS_req_list_docs = "Requirement Specification Documents";
 // ----- gui/templates/tcEdit_New_viewer.tpl -----
 $TLS_alt_add_tc_name = "Add Test Case name. This value is mandatory.";
 $TLS_expected_results = "Expected Results";
-$TLS_preconditions = "Preconditions";
+$TLS_preconditions = "Expected Results";
 $TLS_steps = "Steps";
 $TLS_summary = "Summary";
 $TLS_tc_title = "Test Case Title";
